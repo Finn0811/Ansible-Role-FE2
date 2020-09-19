@@ -1,0 +1,16 @@
+- name: Add apt signing key for amazon-corretto
+  apt_key:
+    url: https://apt.corretto.aws/corretto.key
+    state: present
+
+- name: Add amazon-corretto apt respository
+  apt_repository:
+    repo: deb https://apt.corretto.aws stable main
+    state: present
+    filename: amazon-corretto
+
+- name: Ensure amazon-corretto package is installed
+  apt:
+    name: java-11-amazon-corretto-jdk
+    state: present
+    update_cache: yes

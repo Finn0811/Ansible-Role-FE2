@@ -1,0 +1,19 @@
+[Unit]
+Description=FE2 Server
+After=syslog.target
+
+[Service]
+WorkingDirectory=/opt/fe2
+SyslogIdentifier=FE2
+
+# don't log to syslog, we have our own logs
+StandardOutput=null
+
+ExecStart=/bin/bash -c "java -javaagent:/opt/fe2/bin/FE2.jar -jar /opt/fe2/bin/FE2.jar server"
+User=root
+Type=simple
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

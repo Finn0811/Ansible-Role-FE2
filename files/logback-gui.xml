@@ -1,0 +1,30 @@
+<configuration>
+
+   <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>Logs/log-gui.txt</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>Logs/log-gui.%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 1MB -->
+                <maxFileSize>1MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+	<Pattern>%d{dd.MM.yyyy} - %d{HH:mm:ss.SSS} %-5level %logger{0} - %msg%n</Pattern>
+	<charset>UTF-8</charset>
+		</encoder>
+    </appender> 
+
+
+
+ <logger name="uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4J" level="WARN"/>
+ <logger name="uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4JInitialiser" level="WARN"/>
+  <root level="info">
+  <appender-ref ref="FILE" />
+  </root>
+</configuration>

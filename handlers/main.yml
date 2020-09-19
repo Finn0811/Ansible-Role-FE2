@@ -1,0 +1,9 @@
+- name: restart fe2
+  service:
+    name: fe2
+    state: restarted
+
+- name: restart mongodb
+  service:
+    name: mongodb
+    state: restarted

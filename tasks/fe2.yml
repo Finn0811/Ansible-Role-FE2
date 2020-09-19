@@ -1,0 +1,81 @@
+- name: Ensure /tmp/fe2 exists
+  file:
+    dest: /tmp/fe2
+    mode: 0755
+    state: directory
+    owner: root
+    group: root
+
+- name: Ensure /opt/fe2 exists
+  file:
+    dest: /opt/fe2
+    mode: 0755
+    state: directory
+    owner: root
+    group: root
+
+- name: Download fe2 release
+  get_url:
+    url: http://files.alamos-gmbh.com/FE2/stable/FE2-2.21.88.zip
+    dest: /tmp/fe2/release.zip
+    mode: 0755
+    force: 'yes'
+  notify:
+    - restart fe2
+
+- name: Extract release.zip into /opt/fe2
+  command: "/usr/bin/unzip -qq -o /tmp/fe2/release.zip -d /opt/fe2 -x Config/*"
+  args:
+    warn: 'no'
+
+- name: Ensure /opt/fe2/Config exists
+  file:
+    dest: /opt/fe2/Config
+    mode: 0755
+    state: directory
+    owner: root
+    group: root
+
+- name: Ensure /opt/fe2/Config/data exists
+  file:
+    dest: /opt/fe2/Config/data
+    mode: 0755
+    state: directory
+    owner: root
+    group: root
+
+- name: Copy logback file
+  copy:
+    src: logback.xml
+    dest: /opt/fe2/Config/data/logback.xml
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - restart fe2
+
+- name: Copy logback-gui file
+  copy:
+    src: logback-gui.xml
+    dest: /opt/fe2/Config/data/logback-gui.xml
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - restart fe2
+
+- name: Write configuration file
+  template:
+    src: config.properties.j2
+    dest: /opt/fe2/Config/config.properties
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart fe2
+
+- name: install fe2 systemd unit file
+  template: src=fe2.service.j2 dest=/etc/systemd/system/fe2.service
+
+- name: start fe2
+  systemd: state=started name=fe2 daemon_reload=yes

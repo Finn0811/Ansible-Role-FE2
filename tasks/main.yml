@@ -1,0 +1,9 @@
+- name: Ensure required packages are installed
+  apt:
+    name: ['gnupg2', 'apt-transport-https', 'unzip']
+    state: present
+    update_cache: yes
+
+- include: 'corretto.yml'
+- include: 'mongo.yml'
+- include: 'fe2.yml'
