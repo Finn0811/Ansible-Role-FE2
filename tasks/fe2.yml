@@ -16,7 +16,7 @@
 
 - name: Download fe2 release
   get_url:
-    url: http://files.alamos-gmbh.com/FE2/stable/FE2-2.21.88.zip
+    url: "{{ fe2_download_url }}"
     dest: /tmp/fe2/release.zip
     mode: 0755
     force: 'yes'
