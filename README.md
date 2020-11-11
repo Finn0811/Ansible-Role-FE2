@@ -26,6 +26,13 @@ git clone https://github.com/Finn0811/Ansible-Role-FE2.git
     - fe2
 ```
 
+### Create `fe2_download_url` group var to use for all fe2 hosts
+`nano /etc/ansible/group_vars/fe2.yml`
+
+```yml
+fe2_download_url: http://files.alamos-gmbh.com/FE2/stable/FE2-2.21.116.zip
+```
+
 ### Add host
 `nano /etc/ansible/hosts`
 
