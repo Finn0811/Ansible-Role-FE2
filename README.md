@@ -2,6 +2,12 @@
 
 Ansible Role zur Installation von Alamos FE2 auf Linux servern. Getestet auf Debian und Ubuntu. 
 
+## :rotating_light: Achtung :rotating_light:
+Der Betrieb von FE2 auf Linux Umgebungen wird ausdrücklich **NICHT** von der Alamos GmbH unterstützt.
+
+Eine solche Installation kann im Fehlerfall nicht durch den Support unterstützt werden und der Betrieb geschieht daher auf eigene Gefahr.
+
+
 ## Download
 
 
